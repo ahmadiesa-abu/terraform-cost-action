@@ -147,7 +147,7 @@ runs:
         cli_output = ${{steps.get_node_instance_runtime.outputs.cli-output}}
         pretty_cost = json.loads(cli_output)['runtime_properties']['plain_text_infracost']
         print('pretty_cost {0}'.format(pretty_cost))
-        pretty_plan = pretty_plan.replace('%','%25')
-        pretty_plan = pretty_plan.replace('\n','%0A')
-        pretty_plan = pretty_plan.replace('\r','%0D')
+        pretty_cost = pretty_cost.replace('%','%25')
+        pretty_cost = pretty_cost.replace('\n','%0A')
+        pretty_cost = pretty_cost.replace('\r','%0D')
         print ('::set-output name=cost::{0}'.format(pretty_cost))
