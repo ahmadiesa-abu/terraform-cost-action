@@ -53,6 +53,7 @@ runs:
           workflow_parms = {
             'infracost_config':{
               'api_key': "${{ inputs.api-key }}",
+              'installation_source': 'https://github.com/infracost/infracost/releases/download/v0.10.3/infracost-linux-amd64.tar.gz',
               'enable': True,
             }
           }
