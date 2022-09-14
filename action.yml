@@ -78,6 +78,19 @@ runs:
             dep_ids = [dep.get('deployment_id') for dep in environments]
             raise Exception("Your name/labels may refer to these deployments {0} , please specify which one using environment-id input".format(dep_ids))
 
+    - name: Execute Terraform cost
+      if: ${{ steps.check_if_deployment_exists.outputs.exists != 'true' }}
+      id: terraform_cost
+      uses: ahmadiesa-abu/terraform-action@master
+      with:
+          environment-name: ${{ inputs.environment-name }}
+          module-file: ${{ inputs.module-file }}
+          module-source-path: ${{ inputs.module-source-path }}
+          variables-file: ${{ inputs.variables-file }}
+          outputs-file: "env-plan-data.json"
+          labels: ${{ inputs.labels }}
+          cost: "true"
+
     - name: Execute Terraform plan workflow
       if: ${{ steps.check_if_deployment_exists.outputs.exists == 'true' }}
       id: terraform_plan_wf
